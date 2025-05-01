@@ -1,4 +1,38 @@
 @import 'tailwindcss';
+:root{
+  --main-color-blue: #1B2133;}
+@font-face {
+  font-family: 'Qanelas-black';
+  font-style: normal;
+  src: url('./assets/font/QanelasBlack.woff') format('woff');
+}
+@font-face {
+  font-family: 'Qanelas-bold';
+  font-style: normal;
+  src: url('./assets/font/QanelasBold.woff') format('woff');
+}
+@font-face {
+  font-family: 'Qanelas-medium';
+  font-style: normal;
+  src: url('./assets/font/QanelasMedium.woff') format('woff');
+}
+@font-face {
+  font-family: 'Qanelas-regular';
+  font-style: normal;
+  src: url('./assets/font/QanelasRegular.woff') format('woff');
+}
+@font-face {
+  font-family: 'Qanelas-semi-bold';
+  font-style: normal;
+  src: url('./assets/font/QanelasSemiBold.woff') format('woff');
+}
+@theme {
+  --font-black-Qanelas: "Qanelas-black", "sans-serif"; 
+  --font-bold-Qanelas: "Qanelas-bold", "sans-serif"; 
+  --font-medium-Qanelas: "Qanelas-medium", "sans-serif"; 
+  --font-regular-Qanelas: "Qanelas-regular", "sans-serif"; 
+  --font-semi-bold-Qanelas: "Qanelas-semi-bold", "sans-serif"; 
+}
 * {
   padding: 0px;
   margin: 0px;
@@ -15,10 +49,6 @@ a:hover {
 }
 aside, nav, footer, header, section, main {
   display: block;
-}
-h1, h2, h3, h4, h5, h6, p {
-  font-size: inherit;
-  font-weight: inherit;
 }
 ul, ul li {
   list-style: none;
@@ -65,9 +95,21 @@ legend {
 input[type='file'] {
   max-width: 100%;
 }
+html,body{
+  height: 100%;
+}
+body{
+  background-color: var(--main-color-blue);
+}
+/* index.css */
+#root {
+  font-family: 'Roboto', sans-serif;
+  height: 100vh;
+}
+
 .container{
-    max-width: 1447px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 15px;
+  max-width: 1447px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 15px;
 }
