@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 :root{
-  --main-color-blue: #1B2133;}
+  --main-color-blue: #1B2133;
+}
 @font-face {
   font-family: 'Qanelas-black';
   font-style: normal;
@@ -32,7 +33,13 @@
   --font-medium-Qanelas: "Qanelas-medium", "sans-serif"; 
   --font-regular-Qanelas: "Qanelas-regular", "sans-serif"; 
   --font-semi-bold-Qanelas: "Qanelas-semi-bold", "sans-serif";
-  --color-vivid-blue: #3657CB
+  --color-vivid-blue: #3657CB;
+  --color-space-blue: #1E2538;
+  --color-void-blue: #151A26;
+  --color-neon-yellow: #F2F60F;
+  --color-royal-blue: #3657CB;
+  --color-dark-navy:#191E2E;
+
 
 }
 *,*::before,*::after {
@@ -63,7 +70,9 @@ address {
 input::-ms-clear {
   display: none;
 }
-
+button{
+  cursor: pointer;
+}
 input:focus, input:active,
 button:focus, button:active {
   outline: none;
