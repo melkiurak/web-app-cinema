@@ -4,11 +4,14 @@ import './index.css'
 import App from './App.tsx'
 import { store } from './redux/store.ts'
 import { Provider } from 'react-redux'
-
+import { QueryClient, QueryClientProvider } from 'react-query'
+const queryClient = new QueryClient();
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </QueryClientProvider>
   </StrictMode>,
 )
