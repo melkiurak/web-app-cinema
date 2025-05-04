@@ -32,4 +32,3 @@ export interface Movie {
     numVotes: number;
     metascore: number;
   }
-  
