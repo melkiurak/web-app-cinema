@@ -7,7 +7,7 @@ import { Auth } from '../Auth/Auth';
 
 export const Header = () => {
     const [authModal, setAuthModal] = useState(false);
-    return <header className=" fixed top-5 left-0 w-full ">
+    return <header className="w-full ">
         <div className='container relative flex justify-between items-center max-lg:flex-col max-lg:gap-6'>
             <div className='flex flex-col justify-center items-center gap-2.5'>
                 <img src={logo} alt="" className='max-md:w-[94px] max-md:h-[24px]' />

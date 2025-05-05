@@ -8,7 +8,7 @@ function App() {
   return (
     <div>
       <Header/>
-      <main>
+      <main className='container !pt-14'>
         <Movies/>
       </main>
     </div>

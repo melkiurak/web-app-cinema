@@ -20,16 +20,16 @@ export const movieFilters = createSlice({
       state.filteredMovies = action.payload
     },
     setName:(state,action) => {
-      state.filteredMovies = state.allMovies.filter(movie => movie.primaryTitle === action.payload)
+      state.filteredMovies = state.allMovies.filter(movie => movie.primaryTitle.toLocaleLowerCase().includes(action.payload.toLocaleLowerCase().trim()))
     },
     setYear:(state, action)=>{
       state.filteredMovies = state.allMovies.filter(movie => movie.startYear === action.payload)
     },
     setGenre:(state,action) => {
-      state.filteredMovies = state.allMovies.filter(movie => movie.primaryTitle === action.payload)
+      state.filteredMovies = state.allMovies.filter(movie => movie.genres.some((genre) => genre.includes(action.payload)))
     },
     setCountries :(state,action) => {
-      state.filteredMovies = state.allMovies.filter(movie => movie.primaryTitle === action.payload)
+      state.filteredMovies = state.allMovies.filter(movie => movie.countriesOfOrigin.includes(action.payload))
     },
     setRekeaseDate:(state,action) => {
       state.filteredMovies = state.allMovies.filter(movie => movie.primaryTitle === action.payload)
@@ -48,5 +48,5 @@ export const movieFilters = createSlice({
     },
   }
 });
-export const {setYear,setMovies,setName} = movieFilters.actions
+export const {setYear,setMovies,setName,setGenre,setCountries} = movieFilters.actions
 export default movieFilters.reducer
