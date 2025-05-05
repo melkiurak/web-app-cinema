@@ -29,7 +29,7 @@ export const movieFilters = createSlice({
       state.filteredMovies = state.allMovies.filter(movie => movie.genres.some((genre) => genre.includes(action.payload)))
     },
     setCountries :(state,action) => {
-      state.filteredMovies = state.allMovies.filter(movie => movie.name.includes(action.payload))
+      state.filteredMovies = state.allMovies.filter(movie => movie.country.includes(action.payload))
     },
     setRekeaseDate:(state,action) => {
       state.filteredMovies = state.allMovies.filter(movie => movie.name === action.payload)
