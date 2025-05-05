@@ -6,16 +6,16 @@ import { Movie } from "../../type";
 import { RootState } from "../../redux/store";
 
 export const Movies = () => {
-  const [yearValue, setYearValue] = useState<number | string>('');
+  const [nameValue, setNameValue] = useState('');
   const dispatch = useDispatch();
   const { data } = useMovieQuery();
   const filteredMovies = useSelector((state: RootState) => state.movieFilters.filteredMovies); 
-  console.log(yearValue, data)
+
   const yearChange = (e:ChangeEvent<HTMLInputElement>) => {
-    setYearValue(e.target.value);
+    setNameValue(e.target.value);
     dispatch(setYear(e.target.value))
   }
-  
+
   useEffect(() => {
     dispatch(setMovies(data)); 
   }, [data, dispatch]);
@@ -23,9 +23,9 @@ export const Movies = () => {
   return (
     <div>
       <input
-        type="number"
-        value={yearValue}
-        placeholder="Введите год"
+        type="text"
+        value={nameValue}
+        placeholder="Полное или частичное название"
         onChange={yearChange}
       />
       <div>
