@@ -1,9 +1,11 @@
-import { useDispatch } from "react-redux";
-import { ChangeEvent, useState } from "react";
-import { setCountries, setGenre, setName, setYear, } from "../../redux/features/movieFilters/movieSlice"; 
-//import { Movie } from "../../type";
-//import { RootState } from "../../redux/store";
+import { useDispatch, useSelector } from "react-redux";
+import { ChangeEvent, useEffect, useState } from "react";
+import { setCountries, setGenre, setMovies, setName, setYear, } from "../../redux/features/movieFilters/movieSlice"; 
+import { Movie } from "../../type";
+import { RootState } from "../../redux/store";
 import { TiArrowSortedUp } from "react-icons/ti";
+import { useQuery } from "react-query";
+import { getMovies } from "../../service/getMovies";
 
 export const Movies = () => {
   const [nameValue, setNameValue] = useState('');
@@ -15,8 +17,11 @@ export const Movies = () => {
   const [countriesShow, setCountriesShow] = useState(false);
 
   const dispatch = useDispatch();
-  //const { data } = useMovieQuery();
-  //const filteredMovies = useSelector((state: RootState) => state.movieFilters.filteredMovies); 
+  const { data } = useQuery({
+    queryKey: ["Film"],
+    queryFn: getMovies,
+  })
+  const filteredMovies = useSelector((state: RootState) => state.movieFilters.filteredMovies); 
   
   const yearMovie = Array.from({length:2025 - 1950 + 1}, (_, i) => 2025 - i)
   const genres = ["Action","Adventure","Animation","Biography","Comedy","Crime","Documentary","Drama","Family","Fantasy","Film-Noir","History","Horror","Music","Musical","Mystery","Romance","Sci-Fi","Short","Sport","Superhero","Thriller","War","Western"];
@@ -36,9 +41,9 @@ export const Movies = () => {
     setNameValue(e.target.value)
     dispatch(setName(e.target.value))
   }
-  {/*useEffect(() => {
+  useEffect(() => {
     dispatch(setMovies(data)); 
-  }, [data, dispatch]);*/}
+  }, [data, dispatch]);
 
   return (
     <div>
@@ -93,11 +98,11 @@ export const Movies = () => {
         </div>
         <button type="submit">Поиск</button>
       </form>
-      {/*<div>
+      <div>
         {filteredMovies?.map((movie: Movie) => ( 
-          <div key={movie.id}>{movie.primaryTitle}</div>
+          <div key={movie.id}>{movie.name}</div>
         ))}
-      </div>*/}
+      </div>
     </div>
   );
 }; 

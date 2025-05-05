@@ -1,34 +1,51 @@
 export interface AuthProps{
-    setAuthModal: (isOpen: boolean) => void;
+  setAuthModal: (isOpen: boolean) => void;
 }
 export interface Movie {
-    id: string;
-    url: string;
-    primaryTitle: string;
-    originalTitle: string;
-    type: string;
-    description: string;
-    primaryImage: string;
-    trailer: string;
-    contentRating: string;
-    startYear: number;
-    endYear: number | null;
-    releaseDate: string;
-    interests: string[];
-    countriesOfOrigin: string[];
-    externalLinks: null;
-    spokenLanguages: string[];
-    filmingLocations: string[];
-    productionCompanies: {
-      id: string;
-      name: string;
-    }[];
-    budget: number;
-    grossWorldwide: number;
-    genres: string[];
-    isAdult: boolean;
-    runtimeMinutes: number;
-    averageRating: number;
-    numVotes: number;
-    metascore: number;
-  }
+  id: string;
+  name: string;
+  name_en: string;
+  description: string;
+  slogan: string;
+  year: number;
+  date: string;
+  ukrainePremiere: string;
+  worldPremiere: string;
+  upcoming: boolean;
+  status: string;
+
+  poster: string;
+  background: string;
+
+  duration: number;
+  ageRating: string;
+
+  genres: string[];
+  actors: string[];
+  productionCompanies: string[];
+  visualEffects: string[];
+
+  director: string;
+  screenwriter: string;
+  cinematographer: string;
+  editor: string;
+  composer: string;
+  producer: string;
+  productionDesigner: string;
+  dubbingStudio: string;
+
+  rating: number;
+  ratingIMDb: number;
+  ratingKinoarea: number;
+  expectationRating: number;
+
+  country: string;
+  worldBoxOffice: number;
+
+  comments: {
+    positive: number;
+    neutral: number;
+    negative: number;
+    total: number;
+  };
+}
