@@ -70,61 +70,70 @@ export const Movies = () => {
   }, [data, dispatch]);
 
   return (
-    <div>
-      <form action="">
-        <input
-          type="text"
-          value={nameValue}
-          placeholder="Полное или частичное название"
-          onChange={nameChange}
-        />
-        <div>
-          <h4>Год</h4>
-          <div className="relative">
-            <button type="button" className="flex items-center"  onClick={() => setYearShow(prevState => !prevState)}>
-              <p>{selectedYear ?? 'Введите год'}</p>
-              <TiArrowSortedUp/>
-            </button>
-            <div className={` flex-col gap-3 absolute z-10 bg-space-blue text-white p-5 ${yearShow ? 'flex' : 'hidden'}`}>
-              {yearShow &&  yearMovie.map((year) => (
-                <button type="button" key={year} className="" onClick={() => {dispatch(setYear(year)); setSelectedYear(year);setYearShow(false)}}>{year}</button>
-              ))}
+    <div className="flex flex-col gap-10">
+      <div className="bg-dark-navy p-[42px] rounded-[10px]">
+        <form action="" className="flex gap-10 ">
+          <div className="filter max-w-[458px] w-full">
+            <h4 className="filter_h4">Навзание фильма</h4>
+            <input
+              type="text"
+              value={nameValue}
+              placeholder="Полное или частичное название"
+              onChange={nameChange}
+              className="py-[22px] pl-[27px] w-full"
+            />
+          </div>
+          <div className="filter">
+            <h4 className="filter_h4">Год</h4>
+            <div className="relative filter__select">
+              <button type="button" className="flex items-center gap-5"  onClick={() => setYearShow(prevState => !prevState)}>
+                <p>{selectedYear ?? 'Введите год'}</p>
+                <TiArrowSortedUp/>
+              </button>
+              <div className={` w-full left-0 top-[100px] flex-col gap-3 absolute z-10 bg-space-blue text-white p-5 ${yearShow ? 'flex' : 'hidden'}`}>
+                {yearShow &&  yearMovie.map((year) => (
+                  <button type="button" key={year} className="" onClick={() => {dispatch(setYear(year)); setSelectedYear(year);setYearShow(false)}}>{year}</button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-        <div>
-          <h4>Жанр фильма</h4>
-          <div className="relative">
-            <button type="button" className="flex items-center"  onClick={() => setGenreShow(prevState => !prevState)}>
-              <p>{selectedGenre ?? 'Введите год'}</p>
-              <TiArrowSortedUp/>
-            </button>
-            <div className={` flex-col gap-3 absolute z-10 bg-space-blue text-white p-5 ${genreShow ? 'flex' : 'hidden'}`}>
-              {genreShow &&  genres.map((genre) => (
-                <button type="button" key={genre} className="" onClick={() => {dispatch(setGenre(genre)); setSelectedGenre(genre); setGenreShow(false)}}>{genre}</button>
-              ))}
+          <div className="filter">
+            <h4 className="filter_h4">Жанр фильма</h4>
+            <div className="relative">
+              <button type="button" className="flex items-center"  onClick={() => setGenreShow(prevState => !prevState)}>
+                <p>{selectedGenre ?? 'Введите год'}</p>
+                <TiArrowSortedUp/>
+              </button>
+              <div className={` flex-col gap-3 absolute z-10 bg-space-blue text-white p-5 ${genreShow ? 'flex' : 'hidden'}`}>
+                {genreShow &&  genres.map((genre) => (
+                  <button type="button" key={genre} className="" onClick={() => {dispatch(setGenre(genre)); setSelectedGenre(genre); setGenreShow(false)}}>{genre}</button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-        <div>
-          <h4>Страна фильма:</h4>
-          <div className="relative">
-            <button type="button" className="flex items-center"  onClick={() => setCountriesShow(prevState => !prevState)}>
-              <p>{selectedCountries ?? 'Введите год'}</p>
-              <TiArrowSortedUp/>
-            </button>
-            <div className={` flex-col gap-3 absolute z-10 bg-space-blue text-white p-5 ${countriesShow ? 'flex' : 'hidden'}`}>
-              {countriesShow &&  countries.map((countrie) => (
-                <button type="button" key={countrie} className="" onClick={() => {dispatch(setCountries(countrie)); setSelectedCountries(countrie); setCountriesShow(false)}}>{countrie}</button>
-              ))}
+          <div className="filter">
+            <h4 className="filter_h4">Страна фильма:</h4>
+            <div className="relative">
+              <button type="button" className="flex items-center"  onClick={() => setCountriesShow(prevState => !prevState)}>
+                <p>{selectedCountries ?? 'Введите год'}</p>
+                <TiArrowSortedUp/>
+              </button>
+              <div className={` flex-col gap-3 absolute z-10 bg-space-blue text-white p-5 ${countriesShow ? 'flex' : 'hidden'}`}>
+                {countriesShow &&  countries.map((countrie) => (
+                  <button type="button" key={countrie} className="" onClick={() => {dispatch(setCountries(countrie)); setSelectedCountries(countrie); setCountriesShow(false)}}>{countrie}</button>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
-        <button type="submit">Поиск</button>
-      </form>
-      <div>
-        {filteredMovies?.map((movie: Movie) => ( 
-          <div key={movie.id}>{movie.name}</div>
+          <button type="submit">Поиск</button>
+        </form>
+      </div>
+      <div className="flex flex-wrap gap-5">
+        {filteredMovies?.slice(0, 10).map((movie: Movie) => ( 
+          <div className="w-[250px]" key={movie.id}>
+            <img src={movie.poster} alt=""/>
+            <h4>{movie.name}</h4>
+          </div>
         ))}
       </div>
     </div>
