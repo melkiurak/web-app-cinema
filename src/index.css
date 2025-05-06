@@ -119,3 +119,11 @@ body{
 .filter__select{
   @apply bg-space-blue text-[#FFFFFF99] font-medium-Qanelas text-[17px] w-full py-[22px] px-2 rounded-[10px];
 }
+.custom-range::-webkit-slider-thumb {
+  appearance: none;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  background-color: #3b82f6;
+  cursor: pointer;
+}

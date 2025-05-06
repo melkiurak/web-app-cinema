@@ -1,21 +1,23 @@
 import { useDispatch, useSelector } from "react-redux";
 import { ChangeEvent, useEffect, useState } from "react";
-import { setCountries, setGenre, setMovies, setName, setYear, } from "../../redux/features/movieFilters/movieSlice"; 
+import { setCountries, setEditor, setGenre, setMovies, setName, setRating, setYear, } from "../../redux/features/movieFilters/movieSlice"; 
 import { Movie } from "../../type";
 import { RootState } from "../../redux/store";
 import { TiArrowSortedUp } from "react-icons/ti";
 import { useQuery } from "react-query";
 import { getMovies } from "../../service/getMovies";
+import { Slider } from "@mui/material";
 
 export const Movies = () => {
   const [nameValue, setNameValue] = useState('');
+  const [editorValue, setEditorValue] = useState('');
+  const [ratingValue, setRatingValue] = useState<number[]>([0, 10]);
   const [selectedYear, setSelectedYear] = useState<number | null>(null);
   const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
   const [selectedCountries, setSelectedCountries] = useState<string | null>(null);
   const [yearShow, setYearShow] = useState(false);
   const [genreShow, setGenreShow] = useState(false);
   const [countriesShow, setCountriesShow] = useState(false);
-
   const dispatch = useDispatch();
   const { data } = useQuery({
     queryKey: ["Film"],
@@ -60,26 +62,33 @@ export const Movies = () => {
     "Мэн", "Молдова", "Ангола", "Зимбабве", "Бурунди", "Непал", "Вьетнам", "Македония", "Бутан", "Лаос", "Словения", "Хорватия", 
     "Болгария", "Сербия", "Албания", "Босния и Герцеговина", "Черногория", "Монголия", "Бахрейн", "Судан", "Мали", "Афганистан"
   ];
-  
-  const nameChange = (e:ChangeEvent<HTMLInputElement>) => {
+
+  const nameSearch = (e:ChangeEvent<HTMLInputElement>) => {
     setNameValue(e.target.value)
     dispatch(setName(e.target.value))
+  }
+  const editroSearch = (e:ChangeEvent<HTMLInputElement>) => {
+    setEditorValue(e.target.value)
+    dispatch(setEditor(e.target.value))
+  }
+  const retingSearch = (e: Event, newValue: number[]) => {
+    setRatingValue(newValue)
+    dispatch(setRating(newValue))
   }
   useEffect(() => {
     dispatch(setMovies(data)); 
   }, [data, dispatch]);
-
   return (
     <div className="flex flex-col gap-10">
       <div className="bg-dark-navy p-[42px] rounded-[10px]">
-        <form action="" className="flex gap-10 ">
+        <form action="" className="flex gap-10 flex-wrap ">
           <div className="filter max-w-[458px] w-full">
             <h4 className="filter_h4">Навзание фильма</h4>
             <input
               type="text"
               value={nameValue}
               placeholder="Полное или частичное название"
-              onChange={nameChange}
+              onChange={nameSearch}
               className="py-[22px] pl-[27px] w-full"
             />
           </div>
@@ -121,6 +130,29 @@ export const Movies = () => {
               <div className={` flex-col gap-3 absolute z-10 bg-space-blue text-white p-5 ${countriesShow ? 'flex' : 'hidden'}`}>
                 {countriesShow &&  countries.map((countrie) => (
                   <button type="button" key={countrie} className="" onClick={() => {dispatch(setCountries(countrie)); setSelectedCountries(countrie); setCountriesShow(false)}}>{countrie}</button>
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="filter max-w-[458px] w-full">
+            <h4 className="filter_h4">Создатели</h4>
+            <input
+              type="text"
+              value={editorValue}
+              placeholder="Продюсор"
+              onChange={editroSearch}
+              className="py-[22px] pl-[27px] w-full"
+            />
+          </div>
+          <div className="flex flex-col max-w-[655px] w-full">
+            <div className="flex gap-3">
+              <input type='radio' />
+              <span>Оценка IMDb</span>
+            </div>
+            <div className="w-full">
+              <Slider getAriaLabel={() => 'Temperature range'} valueLabelDisplay="auto" value={ratingValue} onChange={retingSearch} min={0} max={10}/>
+              <div className="w-full flex justify-between">{Array.from({length: 11}, (_, i) => (
+                <span key={i} className="text-[#A5A8AF] font-medium-Qanelas text-[17px]">{i}</span>
                 ))}
               </div>
             </div>
