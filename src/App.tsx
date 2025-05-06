@@ -1,6 +1,6 @@
 import './index.css'
 import { Header } from './Components/Header/Header'
-import { Movies } from './Components/Movie/Movie'
+import { Filters } from './Page/Filters/Filters'
 
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
     <div>
       <Header/>
       <main className='container !pt-14'>
-        <Movies/>
+        <Filters/>
       </main>
     </div>
   )

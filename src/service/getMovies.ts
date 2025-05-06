@@ -1,9 +1,22 @@
-import { collection, getDocs } from "firebase/firestore"
-import { db } from "./base"
+import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
+import { collection, db, getDocs } from './base';
 
-export const getMovies = async () => {
-    const snaphot = await getDocs(collection(db, 'Film'));
-    return snaphot.docs.map(doc => ({
-        id: doc.id, ...doc.data()
-    }));
-};
+export const firebaseApi = createApi({
+  reducerPath: 'firebaseApi',
+  baseQuery: fakeBaseQuery(), 
+  endpoints: (builder) => ({
+    getMovies: builder.query({
+      queryFn: async () => {
+        try {
+          const querySnapshot = await getDocs(collection(db, 'Film'));
+          const movies = querySnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+          return { data: movies };
+        } catch (error) {
+          return { error };
+        }
+      },
+    }),
+  }),
+});
+
+export const {useGetMoviesQuery} = firebaseApi;

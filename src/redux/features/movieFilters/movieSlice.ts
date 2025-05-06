@@ -40,7 +40,7 @@ export const movieFilters = createSlice({
       const [min, max] = action.payload;
       state.filteredMovies = state.allMovies.filter(movie => movie.rating >= min && movie.rating <= max)
     },
-  }
+  },
 });
 export const {setYear,setMovies,setName,setGenre,setCountries,setEditor,setRating} = movieFilters.actions
 export default movieFilters.reducer
