@@ -111,7 +111,7 @@ body{
   @apply font-black-Qanelas text-[25px] text-white;
 }
 .filter{
-  @apply flex flex-col gap-[22px];
+  @apply flex flex-col gap-[22px] justify-between;
   input{ 
     @apply bg-space-blue text-[#FFFFFF99] font-medium-Qanelas text-[17px];
   }

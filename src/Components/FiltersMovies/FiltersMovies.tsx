@@ -77,7 +77,7 @@ export const FiltersMovies = () => {
   return (
     <div className="flex flex-col gap-10">
       <div className="bg-dark-navy p-[42px] rounded-[10px]">
-        <form action="" className="flex gap-10 flex-wrap ">
+        <form action="" className="flex gap-10 flex-wrap justify-center ">
           <div className="filter max-w-[458px] w-full">
             <h4 className="filter_h4">Навзание фильма</h4>
             <input
@@ -123,7 +123,9 @@ export const FiltersMovies = () => {
               </div>
             </div>
           </div>
-          <button type="submit">Поиск</button>
+          <div className="w-full flex justify-center">
+            <button type="submit" className="bg-neon-yellow text-void-blue py-[21px] px-[65px] rounded-[10px] text-lg font-bold-Qanelas">Поиск</button>
+          </div>
         </form>
       </div>
     </div>
