@@ -2,20 +2,14 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useGetMoviesQuery } from "../../service/getMovies";
 import { setCountries, setEditor, setGenre, setMovies, setName, setRating, setYear } from "../../redux/features/movieFilters/movieSlice";
-import { TiArrowSortedUp } from "react-icons/ti";
 import { Slider } from "@mui/material";
+import { CustomAutocomplete } from "../UI/CustomAutocomplete";
 
 
 export const FiltersMovies = () => {
   const [nameValue, setNameValue] = useState('');
   const [editorValue, setEditorValue] = useState('');
   const [ratingValue, setRatingValue] = useState<number[]>([0, 10]);
-  const [selectedYear, setSelectedYear] = useState<number | null>(null);
-  const [selectedGenre, setSelectedGenre] = useState<string | null>(null);
-  const [selectedCountries, setSelectedCountries] = useState<string | null>(null);
-  const [yearShow, setYearShow] = useState(false);
-  const [genreShow, setGenreShow] = useState(false);
-  const [countriesShow, setCountriesShow] = useState(false);
   const dispatch = useDispatch();
   
   const { data: allmovies, isLoading, isError } = useGetMoviesQuery(null);
@@ -95,46 +89,16 @@ export const FiltersMovies = () => {
             />
           </div>
           <div className="filter">
-            <h4 className="filter_h4">Год</h4>
-            <div className="relative filter__select">
-              <button type="button" className="flex items-center gap-5"  onClick={() => setYearShow(prevState => !prevState)}>
-                <p>{selectedYear ?? 'Введите год'}</p>
-                <TiArrowSortedUp/>
-              </button>
-              <div className={` w-full left-0 top-[100px] flex-col gap-3 absolute z-10 bg-space-blue text-white p-5 ${yearShow ? 'flex' : 'hidden'}`}>
-                {yearShow &&  yearMovie.map((year) => (
-                  <button type="button" key={year} className="" onClick={() => {dispatch(setYear(year)); setSelectedYear(year);setYearShow(false)}}>{year}</button>
-                ))}
-              </div>
-            </div>
+            <h4 className="filter_h4">Год:</h4>
+            <CustomAutocomplete options={yearMovie} label="Год" onChange={(_,value) => {if (value !== null) {dispatch(setYear(value))}}}/>
           </div>
           <div className="filter">
-            <h4 className="filter_h4">Жанр фильма</h4>
-            <div className="relative">
-              <button type="button" className="flex items-center"  onClick={() => setGenreShow(prevState => !prevState)}>
-                <p>{selectedGenre ?? 'Введите год'}</p>
-                <TiArrowSortedUp/>
-              </button>
-              <div className={` flex-col gap-3 absolute z-10 bg-space-blue text-white p-5 ${genreShow ? 'flex' : 'hidden'}`}>
-                {genreShow &&  genres.map((genre) => (
-                  <button type="button" key={genre} className="" onClick={() => {dispatch(setGenre(genre)); setSelectedGenre(genre); setGenreShow(false)}}>{genre}</button>
-                ))}
-              </div>
-            </div>
+            <h4 className="filter_h4">Жанр фильма:</h4>
+            <CustomAutocomplete options={genres} label="Жанры" onChange={(_,value) => {if (value !== null) {dispatch(setGenre(value))}}}/>
           </div>
           <div className="filter">
             <h4 className="filter_h4">Страна фильма:</h4>
-            <div className="relative">
-              <button type="button" className="flex items-center"  onClick={() => setCountriesShow(prevState => !prevState)}>
-                <p>{selectedCountries ?? 'Введите год'}</p>
-                <TiArrowSortedUp/>
-              </button>
-              <div className={` flex-col gap-3 absolute z-10 bg-space-blue text-white p-5 ${countriesShow ? 'flex' : 'hidden'}`}>
-                {countriesShow &&  countries.map((countrie) => (
-                  <button type="button" key={countrie} className="" onClick={() => {dispatch(setCountries(countrie)); setSelectedCountries(countrie); setCountriesShow(false)}}>{countrie}</button>
-                ))}
-              </div>
-            </div>
+            <CustomAutocomplete options={countries} label="Страны" onChange={(_,value) => {if (value !== null) {dispatch(setCountries(value))}}}/>
           </div>
           <div className="filter max-w-[458px] w-full">
             <h4 className="filter_h4">Создатели</h4>
